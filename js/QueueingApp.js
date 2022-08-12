@@ -30,9 +30,6 @@ function QueueingApp() {
     mu = parseFloat(mu);
     s = document.getElementById("s").value;
     s = parseFloat(s);
-    /*lambda = 14.86;
-    mu = 15.37;
-    s = 6;*/
     invLambda = 1 / lambda * 60;
     document.getElementById("invLambda").innerHTML = invLambda;
     invMu = 1 / mu * 60;
