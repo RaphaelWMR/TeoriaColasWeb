@@ -40,14 +40,15 @@
         </div>
         <div class="detalles">
             <p class=" fw-300">&lambda;= Tasa promedio de llegadas en la unidad de tiempo.</p>
-            <p class=" fw-300">1/&lambda;= Tiempo entre llegadas de los clientes.</p>
+            <p class=" fw-300">\(\frac{1}{\lambda} \)= Tiempo entre llegadas de los clientes.</p>
             <p class=" fw-300">&mu;= Tasa promedio de servicio.</p>
-            <p class=" fw-300">1/&mu;= Tiempo de servicio.</p>
+            <p class=" fw-300">\(\frac{1}{\mu} \)= Tiempo de servicio.</p>
             <p class=" fw-300">&rho;= Tiempo esperado que el servidor este ocupado.</p>
-            <p class=" fw-300">Ws = Tiempo estimado de espera en el sistema.</p>
-            <p class=" fw-300">Wq = Tiempo estimado de espera en la fila.</p>
-            <p class=" fw-300">Ls = Numero estimado de clientes en el sistema.</p>
-            <p class=" fw-300">Lq = Número de clientes en ela fila.</p>
+            <p class=" fw-300">Ws = Tiempo estimado de espera en el sistema. \(W_s=W_q+\frac{1}{\mu}\)</p>
+            <p class=" fw-300">Wq = Tiempo estimado de espera en la fila. \(W_q=\frac{L_q}{\lambda}\)</p>
+            <p class=" fw-300">Ls = Numero estimado de clientes en el sistema. \(L_s=L_q+\rho\)</p>
+            <p class=" fw-300">Lq = Número de clientes en ela fila. \(L_q=\frac{\rho^{S+1}}{\left ( S-1 \right )!\left ( S-p \right )^{2}} P_0 \)</p>
+            <p class=" fw-300">\(P_0\) =Posibilidad de que el sistema este desocupado. \(P_0=\frac{1}{\sum_{n=0}^{n=S-1}\frac{\rho^{n}}{n!}+\frac{\rho^{s}}{S!}\left (\frac{1}{1-\rho/s} \right ) }\)</p>
         </div>
         <div class="TSD">
             <div class="contenedor1">
@@ -188,6 +189,8 @@
             </div>
         </div>
     </section>
+
+
     <footer class="footer">
         <div class="partFooter">
             <div class="f-footer">
