@@ -91,6 +91,17 @@ function modifyDocument() {
     input.disabled = true;
 }
 
+function timing(n) {
+    var hours = Math.floor(n / 1);
+    n = n - hours;
+    var minutesR = parseInt(n * 100) / 100;
+    var minutes = minutesR * 60;
+    n = n - minutesR;
+    n = n.toFixed(4);
+    var seconds = n * 6000;
+    return [hours, minutes, seconds]
+}
+
 function QueueingApp() {
     modifyDocument();
     var lambda = 0,
@@ -113,17 +124,18 @@ function QueueingApp() {
         wq = calcWq(lq, lambda),
         sps = calcSps(rho, s),
         ps = calcPS(lambda, s, mu);
-    document.getElementById("invLambda").innerHTML = invLambda;
-    document.getElementById("invMu").innerHTML = invMu;
-    document.getElementById("rho").innerHTML = rho;
-    document.getElementById("sumatoria").innerHTML = denom;
-    document.getElementById("p0").innerHTML = p0;
-    document.getElementById("lq").innerHTML = lq;
-    document.getElementById("ls").innerHTML = ls;
-    document.getElementById("ws").innerHTML = ws;
-    document.getElementById("wq").innerHTML = wq;
-    document.getElementById("sps").innerHTML = sps;
-    document.getElementById("ps").innerHTML = ps;
-    document.getElementById("p0t").innerHTML = p0;
+    document.getElementById("LambdaIn").innerHTML = lambda;
+    document.getElementById("invLambda").innerHTML = document.getElementById("invLambdaIn").innerHTML = invLambda;
+    document.getElementById("invMu").innerHTML = document.getElementById("invMu").innerHTML = invMu;
+    document.getElementById("rho").innerHTML = document.getElementById("rhoIn").innerHTML = rho;
+    document.getElementById("sumatoria").innerHTML = document.getElementById("invMu").innerHTML = denom;
+    document.getElementById("p0").innerHTML = document.getElementById("invMu").innerHTML = p0;
+    document.getElementById("lq").innerHTML = document.getElementById("invMu").innerHTML = lq;
+    document.getElementById("ls").innerHTML = document.getElementById("invMu").innerHTML = ls;
+    document.getElementById("ws").innerHTML = document.getElementById("invMu").innerHTML = ws;
+    document.getElementById("wq").innerHTML = document.getElementById("invMu").innerHTML = wq;
+    document.getElementById("sps").innerHTML = document.getElementById("invMu").innerHTML = sps;
+    document.getElementById("ps").innerHTML = document.getElementById("invMu").innerHTML = ps;
+    document.getElementById("p0t").innerHTML = document.getElementById("invMu").innerHTML = p0;
 
 }
