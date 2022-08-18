@@ -7,13 +7,14 @@ function clearAll() {
 
 function factorial(n) {
     var total = 1;
-    for (i = 1; i <= n; i++) {
+    for (var i = 1; i <= n; i++) {
         total *= i;
     }
     return total;
 }
 
 function calcInvLambda(lambda) {
+    var invLambda = 1 / lambda * 60;
     return 1 / lambda * 60;
 }
 
@@ -29,18 +30,12 @@ function calcP0(denom) {
     return 1 / denom;
 }
 
-function calcLq(lambda, mu, s, p0) {
-    var rho = calcRho(lambda, mu);
+function calcLq(rho, s, p0) {
     return ((Math.pow(rho, (s + 1))) / (factorial(s - 1) * Math.pow(s - rho, 2))) * p0;
 }
 
-
-function calcLs(lq, lambda, mu) {
-    return lq + (lambda / mu);
-}
-
-function calcLq() {
-    return ((Math.pow(rho, (s + 1))) / (factorial(s - 1) * Math.pow(s - rho, 2))) * p0;
+function calcLs(rho, lq) {
+    return lq + rho;
 }
 
 function calcWs(ls, lambda) {
@@ -51,8 +46,8 @@ function calcWq(lq, lambda) {
     return lq / lambda;
 }
 
-function calcSps(lambda, mu, s) {
-    return (Math.pow(calcRho(lambda, mu), s)) / factorial(s);
+function calcSps(rho, s) {
+    return (Math.pow(rho, s)) / factorial(s);
 }
 
 function calcPS(lambda, s, mu) {
@@ -71,60 +66,64 @@ function appendElement(content, id) {
     element.appendChild(header);
 }
 
-
-
 function tabla(lambda, mu, s) {
-    var denom = 0;
-    for (var i; i < s; i++) {
-        denom += iteration(lambda, my, i);
-        /*Header Tabla */
+    var denom = 0,
+        it = 0,
+        rho = calcRho(lambda, mu);
+    for (var i = 0; i < s; i++) {
+        it = iteration(lambda, mu, i);
+        denom += it;
         appendElement(i, "tableHeader");
-        appendElement(parseFloat(iteration).toFixed(8), "firstRow");
+        appendElement(parseFloat(it).toFixed(8), "firstRow");
     }
-    return denom + ((Math.pow(rho, s)) / factorial(s)) * (1 / (1 - (rho / s)));;
+    denom = denom + ((Math.pow(rho, s)) / factorial(s)) * (1 / (1 - (rho / s)));
+    return denom;
 }
 
-
-
-
-function QueueingApp() {
-    /*Oculta boton Analizar */
+function modifyDocument() {
     var button = document.getElementById("buttonAnalizar");
     button.style.display = "none";
-    /*Entrada de datos obtenida en la BD - Scotiabank*/
-    var invLambda, invMu;
-    /*Entrada de datos en una unidad de tiempo (horas)*/
-    var lambda, mu, s, rho;
-    /*Salida de resultados*/
-    var p0, ls, lq, ws, wq;
-    /*Tabla iteradora */
-    var sps, ps;
-    /*Get Lambda */
+    var input = document.getElementById("lambda");
+    input.disabled = true;
+    input = document.getElementById("mu");
+    input.disabled = true;
+    input = document.getElementById("s");
+    input.disabled = true;
+}
+
+function QueueingApp() {
+    modifyDocument();
+    var lambda = 0,
+        mu = 0,
+        s = 0;
+    /*Input */
     lambda = parseFloat(document.getElementById("lambda").value);
-    /*Get Mu */
     mu = parseFloat(document.getElementById("mu").value);
-    /*Get S */
     s = parseFloat(document.getElementById("s").value);
     /*OutPut */
-    document.getElementById("invLambda").innerHTML = calcInvLambda(lambda);
-    document.getElementById("invMu").innerHTML = calcInvMu(mu);
-    document.getElementById("rho").innerHTML = calcRho(lambda, mu);
-    var denom = tabla(lambda, mu, s);
+    var
+        invLambda = calcInvLambda(lambda),
+        invMu = calcInvMu(mu),
+        rho = calcRho(lambda, mu),
+        denom = tabla(lambda, mu, s),
+        p0 = calcP0(denom),
+        lq = calcLq(rho, s, p0),
+        ls = calcLs(lq, rho),
+        ws = calcWs(ls, lambda),
+        wq = calcWq(lq, lambda),
+        sps = calcSps(rho, s),
+        ps = calcPS(lambda, s, mu);
+    document.getElementById("invLambda").innerHTML = invLambda;
+    document.getElementById("invMu").innerHTML = invMu;
+    document.getElementById("rho").innerHTML = rho;
     document.getElementById("sumatoria").innerHTML = denom;
-    document.getElementById("p0").innerHTML = calcP0(denom);
-    lq = ((Math.pow(rho, (s + 1))) / (factorial(s - 1) * Math.pow(s - rho, 2))) * p0;
+    document.getElementById("p0").innerHTML = p0;
     document.getElementById("lq").innerHTML = lq;
-    ls = lq + (lambda / mu);
     document.getElementById("ls").innerHTML = ls;
-    ws = ls / lambda;
     document.getElementById("ws").innerHTML = ws;
-    wq = lq / lambda;
     document.getElementById("wq").innerHTML = wq;
-    /*Tabla iteradora */
-    sps = (Math.pow(rho, s)) / factorial(s);
     document.getElementById("sps").innerHTML = sps;
-    ps = 1 / (1 - (lambda / s * mu));
     document.getElementById("ps").innerHTML = ps;
-    p0 = 1 / denom;
     document.getElementById("p0t").innerHTML = p0;
+
 }

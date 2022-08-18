@@ -85,17 +85,17 @@
                         <tr>
                             <td class="first-column">&lambda;</td>
                             <td>
-                                <input id="lambda">
+                                <input id="lambda" style="text-align:center">
                             </td>
                             <td class="first-column">&mu;</td>
                             <td>
-                                <input id="mu">
+                                <input id="mu" style="text-align:center">
                             </td>
                         </tr>
                         <tr>
                             <td class="first-column">S</td>
                             <td>
-                                <input id="s">
+                                <input id="s" style="text-align:center">
                             </td>
                             <td class="first-column">&rho;</td>
                             <td>
@@ -110,7 +110,7 @@
                 </div>
                 <br>
                 <div class="m-3">
-                    <a class="boton boton-analizar" onclick="clearAll();">Limpiar</a>
+                    <a class="boton boton-analizar" onclick="clearAll();">Nuevo</a>
                 </div>
             </div>
         </div>
@@ -164,7 +164,6 @@
                             <td class="first-column">
                                 <p id="sumatoria"></p>
                             </td>
-
                         </tr>
                         <tr>
                             <td class="first-column">\(\frac{S^P}{S!}\)</td>
@@ -184,6 +183,26 @@
                                 <p id="p0t"></p>
                             </td>
                         </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="TSD">
+            <div class="contenedor1">
+                <table class="tableizer-table">
+                    <thead>
+                        <tr class="tableizer-firstrow">
+                            <th colspan="4">Interpretación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="">Tasa promedio de llegadas en la unidad de tiempo</td>
+                            <td>
+                                <p id="invLambda"></p>
+                            </td>
+                        </tr>
+
                     </tbody>
                 </table>
             </div>
