@@ -3,6 +3,7 @@
 Aplicación Web de Aplicación del Modelo MMS de Teoría de Colas
 
 Escalante Flores, Eduardo 0000-0002-7575-6828 eduardo.escalante1@unmsm.edu.pe 
+
 Matos Ramos, Wilfredo Raphael 0000-0003-1293-8680 wilfredo.matos@unmsm.edu.pe 
 
 Facultad de Ingeniería de Sistemas e Informática,  
