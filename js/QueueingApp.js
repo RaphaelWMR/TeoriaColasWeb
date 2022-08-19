@@ -102,6 +102,10 @@ function timing(n) {
     return [hours, minutes, seconds]
 }
 
+function toPercent(n) {
+    return (n * 100).toFixed(2) + "%";
+}
+
 function QueueingApp() {
     modifyDocument();
     var lambda = 0,
@@ -124,18 +128,27 @@ function QueueingApp() {
         wq = calcWq(lq, lambda),
         sps = calcSps(rho, s),
         ps = calcPS(lambda, s, mu);
-    document.getElementById("LambdaIn").innerHTML = lambda;
-    document.getElementById("invLambda").innerHTML = document.getElementById("invLambdaIn").innerHTML = invLambda;
-    document.getElementById("invMu").innerHTML = document.getElementById("invMu").innerHTML = invMu;
-    document.getElementById("rho").innerHTML = document.getElementById("rhoIn").innerHTML = rho;
-    document.getElementById("sumatoria").innerHTML = document.getElementById("invMu").innerHTML = denom;
-    document.getElementById("p0").innerHTML = document.getElementById("invMu").innerHTML = p0;
-    document.getElementById("lq").innerHTML = document.getElementById("invMu").innerHTML = lq;
-    document.getElementById("ls").innerHTML = document.getElementById("invMu").innerHTML = ls;
-    document.getElementById("ws").innerHTML = document.getElementById("invMu").innerHTML = ws;
-    document.getElementById("wq").innerHTML = document.getElementById("invMu").innerHTML = wq;
-    document.getElementById("sps").innerHTML = document.getElementById("invMu").innerHTML = sps;
-    document.getElementById("ps").innerHTML = document.getElementById("invMu").innerHTML = ps;
-    document.getElementById("p0t").innerHTML = document.getElementById("invMu").innerHTML = p0;
-
+    document.getElementById("invLambda").innerHTML = invLambda;
+    document.getElementById("invMu").innerHTML = invMu;
+    document.getElementById("rho").innerHTML = rho;
+    document.getElementById("sumatoria").innerHTML = denom;
+    document.getElementById("p0").innerHTML = p0;
+    document.getElementById("lq").innerHTML = lq;
+    document.getElementById("ls").innerHTML = ls;
+    document.getElementById("ws").innerHTML = ws;
+    document.getElementById("wq").innerHTML = wq;
+    document.getElementById("sps").innerHTML = sps;
+    document.getElementById("ps").innerHTML = ps;
+    document.getElementById("p0t").innerHTML = p0;
+    document.getElementById("lambdaIn").innerHTML = lambda;
+    document.getElementById("invLambdaIn").innerHTML = invLambda;
+    document.getElementById("muIn").innerHTML = mu;
+    document.getElementById("invMuIn").innerHTML = invMu;
+    document.getElementById("sIn").innerHTML = s;
+    document.getElementById("rhoIn").innerHTML = rho;
+    document.getElementById("p0In").innerHTML = toPercent(p0);
+    document.getElementById("lqIn").innerHTML = lq;
+    document.getElementById("lsIn").innerHTML = ls;
+    document.getElementById("wqIn").innerHTML = wq;
+    document.getElementById("wsIn").innerHTML = ws;
 }
