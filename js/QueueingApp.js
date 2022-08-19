@@ -91,7 +91,7 @@ function modifyDocument() {
     input.disabled = true;
 }
 
-function timing(n) {
+function timing(n, m = 0) {
     var hours = Math.floor(n / 1);
     n = n - hours;
     var minutesR = parseInt(n * 100) / 100;
@@ -99,7 +99,7 @@ function timing(n) {
     n = n - minutesR;
     n = n.toFixed(4);
     var seconds = n * 6000;
-    return [hours, minutes, seconds]
+    return m == 0 ? hours + "h :" + minutes.toFixed(0) + "m : " + seconds.toFixed(0) + " s" : "0 :" + hours + ": " + minutes.toFixed(0);
 }
 
 function toPercent(n) {
@@ -110,24 +110,34 @@ function QueueingApp() {
     modifyDocument();
     var lambda = 0,
         mu = 0,
-        s = 0;
+        s = 0,
+        invLambda = 0,
+        invMu = 0,
+        rho = 0,
+        denom = 0,
+        p0 = 0,
+        lq = 0,
+        ls = 0,
+        ws = 0,
+        wq = 0,
+        sps = 0,
+        ps = 0;
     /*Input */
     lambda = parseFloat(document.getElementById("lambda").value);
     mu = parseFloat(document.getElementById("mu").value);
     s = parseFloat(document.getElementById("s").value);
     /*OutPut */
-    var
-        invLambda = calcInvLambda(lambda),
-        invMu = calcInvMu(mu),
-        rho = calcRho(lambda, mu),
-        denom = tabla(lambda, mu, s),
-        p0 = calcP0(denom),
-        lq = calcLq(rho, s, p0),
-        ls = calcLs(lq, rho),
-        ws = calcWs(ls, lambda),
-        wq = calcWq(lq, lambda),
-        sps = calcSps(rho, s),
-        ps = calcPS(lambda, s, mu);
+    invLambda = calcInvLambda(lambda);
+    invMu = calcInvMu(mu);
+    rho = calcRho(lambda, mu);
+    denom = tabla(lambda, mu, s);
+    p0 = calcP0(denom);
+    lq = calcLq(rho, s, p0);
+    ls = calcLs(lq, rho);
+    ws = calcWs(ls, lambda);
+    wq = calcWq(lq, lambda);
+    sps = calcSps(rho, s);
+    ps = calcPS(lambda, s, mu);
     document.getElementById("invLambda").innerHTML = invLambda;
     document.getElementById("invMu").innerHTML = invMu;
     document.getElementById("rho").innerHTML = rho;
@@ -137,18 +147,19 @@ function QueueingApp() {
     document.getElementById("ls").innerHTML = ls;
     document.getElementById("ws").innerHTML = ws;
     document.getElementById("wq").innerHTML = wq;
+    document.getElementById("wMin").innerHTML = ws * 60;
     document.getElementById("sps").innerHTML = sps;
     document.getElementById("ps").innerHTML = ps;
     document.getElementById("p0t").innerHTML = p0;
     document.getElementById("lambdaIn").innerHTML = lambda;
-    document.getElementById("invLambdaIn").innerHTML = invLambda;
+    document.getElementById("invLambdaIn").innerHTML = timing(1 / lambda);
     document.getElementById("muIn").innerHTML = mu;
-    document.getElementById("invMuIn").innerHTML = invMu;
+    document.getElementById("invMuIn").innerHTML = timing(1 / mu);
     document.getElementById("sIn").innerHTML = s;
-    document.getElementById("rhoIn").innerHTML = rho;
+    document.getElementById("rhoIn").innerHTML = timing(rho);
     document.getElementById("p0In").innerHTML = toPercent(p0);
     document.getElementById("lqIn").innerHTML = lq;
     document.getElementById("lsIn").innerHTML = ls;
     document.getElementById("wqIn").innerHTML = wq;
-    document.getElementById("wsIn").innerHTML = ws;
+    document.getElementById("wsIn").innerHTML = timing(ws);
 }
